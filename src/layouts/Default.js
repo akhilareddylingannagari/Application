@@ -7,7 +7,7 @@ import MainFooter from '../components/layout/Footer/Footer';
 
 const DefaultLayout = ({ children, noNavbar, noFooter }) => (
   <Container fluid>
-    <Row>
+    <Row className='header-row'>
       <Col lg={{ size: 12 }} md={{ size: 12 }} sm='12'>
         {!noNavbar && <MainNavbar />}
         {children}

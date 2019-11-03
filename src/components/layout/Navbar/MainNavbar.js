@@ -17,12 +17,7 @@ const MainNavbar = ({ layout, stickyTop }) => {
     <div className={classes}>
       <Container className='p-0'>
         <Navbar type='light' className='align-items-stretch flex-md-nowrap p-0'>
-          <LifepowrLogo
-            id='navbarLifepowrLogo'
-            href='#'
-            width={30}
-            height={30}
-          />
+          <LifepowrLogo id='navbarLifepowrLogo' width={60} height={60} />
           <UserActions />
         </Navbar>
       </Container>

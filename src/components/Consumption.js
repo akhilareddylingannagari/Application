@@ -16,7 +16,7 @@ class Consumption extends React.Component {
       },
       {
         category: 'Consumption',
-        value: 40, //lambda API instead of number
+        value: 50, //lambda API instead of number
         full: 100
       },
       {
@@ -83,7 +83,7 @@ class Consumption extends React.Component {
       return chart.colors.getIndex(target.dataItem.index);
     });
     let bullet = series.bullets.create();
-    bullet.fill = am4core.color('#000000');
+    bullet.fill = am4core.color('#ffffff');
     bullet.strokeOpacity = 0;
 
     let bulletValueLabel = bullet.createChild(am4core.Label);
@@ -93,6 +93,7 @@ class Consumption extends React.Component {
     label.text = '{valueY}%' + '\n' + '{categoryX}';
     label.verticalCenter = 'middle';
     label.paddingLeft = -40;
+    // label.fill = am4core.color('#ffffff');
 
     // Cursor
     chart.cursor = new am4charts.RadarCursor();

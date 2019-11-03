@@ -9,6 +9,8 @@ import { DefaultLayout } from './layouts';
 
 // import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
+import Chart from './pages/Chart';
+import TrialChart from './components/LinePlot';
 
 export default [
   {
@@ -32,6 +34,16 @@ export default [
   //   layout: DefaultLayout,
   //   component: Registration
   // },
+  {
+    path: '/Chart',
+    layout: DefaultLayout,
+    component: Chart
+  },
+  {
+    path: '/TrialChart',
+    layout: DefaultLayout,
+    component: TrialChart
+  },
   {
     path: '/Dashboard',
     layout: DefaultLayout,

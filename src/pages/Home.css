@@ -1,0 +1,62 @@
+.backgroundDiv {
+  height: 35vh;
+  width: 100%;
+  background-size: cover;
+  background-blend-mode: darken;
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 2000ms ease-in;
+}
+
+#bigTitle {
+  font-weight: 100;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 3s ease-in;
+}
+
+#navbarLifepowrLogo {
+  margin-right: 10px;
+}
+
+#menuContainer {
+  margin-top: 1rem;
+  left: 0;
+  right: 0;
+}
+
+.menuColumn {
+  min-width: 200px;
+
+  margin: 5px;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  border-width: 1px;
+  border-color: #050f11;
+  border-style: solid;
+  border-radius: 10px;
+
+  background-color: #0a0c0c;
+  cursor: pointer;
+}
+
+.menuColumn:hover {
+  background-color: #141616;
+}
+
+.home.fade-appear-active > #bigTitle {
+  opacity: 1;
+}
+
+.home.fade-appear-active > .footer {
+  opacity: 1;
+}

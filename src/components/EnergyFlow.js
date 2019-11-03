@@ -1,7 +1,8 @@
 import React from 'react';
 import './EnergyFlow.css';
+import { Link, withRouter } from 'react-router-dom';
 
-const DATA_UPDATE_RATE_MS = 1000000;
+const DATA_UPDATE_RATE_MS = 10000;
 const axios = require('axios');
 class EnergyFlow extends React.Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class EnergyFlow extends React.Component {
       SolarIpv2: 0,
       SolarVpv1: 238,
       Status: 'Normal',
+      SystemID: 'SYS00001',
       SolarVpv2: 0
     };
   }
@@ -38,6 +40,7 @@ class EnergyFlow extends React.Component {
           await axios.get(
             `https://g93jjv7s66.execute-api.eu-west-1.amazonaws.com/prod/?${x}`
           );
+          console.error(x);
         } catch (err) {
           console.error('GG', err);
         }
@@ -62,6 +65,7 @@ class EnergyFlow extends React.Component {
         SolarIpv1: Math.round(50 + Math.random() * (25 - 80)),
         SolarIpv2: Math.round(50 + Math.random() * (20 - 90)),
         SolarVpv1: Math.round(20 + Math.random() * (12 - 27)),
+        SystemID: 'SYS00001',
         Status: 'Normal',
         SolarVpv2: Math.round(23 + Math.random() * (10 - 25))
       });
@@ -88,7 +92,7 @@ class EnergyFlow extends React.Component {
       console.log('This is Status' + this.state.Status);
       console.log('This is SolarVpv2' + this.state.SolarVpv2);
       //var inverterData = `Battery_Power=${this.state.Battery_Power}&InverterID=${this.state.InverterID}&DateTime=${this.state.DateTime}`;
-      var inverterData = `Battery_Power=${this.state.Battery_Power}&BatteryIpv=${this.state.BatteryIpv}&BatteryVpv=${this.state.BatteryVpv}&BMS_Charge=${this.state.BMS_Charge}&BMS_Discharge=${this.state.BMS_Discharge}&DateTime=${this.state.DateTime}&Grid_Power=${this.state.Grid_Power}&GridIpv=${this.state.GridIpv}&GridVpv=${this.state.GridVpv}&SOC=${this.state.SOC}&Inverter_Temperature=${this.state.Inverter_Temperature}&InverterID=${this.state.InverterID}&Load_Power=${this.state.Load_Power}&Pmeter=${this.state.Pmeter}&Solar_Power=${this.state.Solar_Power}&SolarIpv1=${this.state.SolarIpv1}&SolarIpv2=${this.state.SolarIpv2}&SolarVpv1=${this.state.SolarVpv1}&SolarVpv2=${this.state.SolarVpv2}&Status=${this.state.Status}`;
+      var inverterData = `SystemID=${this.state.SystemID}&Battery_Power=${this.state.Battery_Power}&BatteryIpv=${this.state.BatteryIpv}&BatteryVpv=${this.state.BatteryVpv}&BMS_Charge=${this.state.BMS_Charge}&BMS_Discharge=${this.state.BMS_Discharge}&DateTime=${this.state.DateTime}&Grid_Power=${this.state.Grid_Power}&GridIpv=${this.state.GridIpv}&GridVpv=${this.state.GridVpv}&SOC=${this.state.SOC}&Inverter_Temperature=${this.state.Inverter_Temperature}&InverterID=${this.state.InverterID}&Load_Power=${this.state.Load_Power}&Pmeter=${this.state.Pmeter}&Solar_Power=${this.state.Solar_Power}&SolarIpv1=${this.state.SolarIpv1}&SolarIpv2=${this.state.SolarIpv2}&SolarVpv1=${this.state.SolarVpv1}&SolarVpv2=${this.state.SolarVpv2}&Status=${this.state.Status}`;
 
       callInverterDataWriteApi(inverterData);
     }, DATA_UPDATE_RATE_MS); // ensures that render does not have to wait for API every time
@@ -100,37 +104,95 @@ class EnergyFlow extends React.Component {
     clearInterval(this.updateTimer);
   }
   render() {
+    const { Load_Power, Grid_Power, Battery_Power, Solar_Power } = this.state;
+    console.log(Load_Power, Grid_Power, Battery_Power, Solar_Power);
+
     return (
-      <ul class='circle-container'>
-        <li>
-          <img src={require('../assets/images/solar-house.png')} />
-        </li>
-        <li>
-          <img src={require('../assets/images/battery4.png')} />
-        </li>
-        <li>
-          <img src={require('../assets/images/tower.png')} />
-        </li>
-        <li>
-          <img src={require('../assets/images/solar-panel.png')} />
-        </li>
-        <li>
-          <img src={require('../assets/images/LPicon2.png')} />
-        </li>
-        <li class='circle-container-animation'>
-          <img src={require('../assets/images/pack.gif')} />
-          <img src={require('../assets/images/pack.gif')} />
-          <img src={require('../assets/images/pack.gif')} />
-          <img src={require('../assets/images/pack.gif')} />
-        </li>
-        <li class='circle-container-lbl'>
-          <label> {this.state.Load_Power}</label>
-          <label> {this.state.Grid_Power}</label>
-          <label> {this.state.Battery_Power}</label>
-          <label> {this.state.Solar_Power}</label>
-        </li>
-      </ul>
+      <div>
+        <ul class='circle-container'>
+          <li>
+            <Link
+              to={{
+                pathname: '/Chart',
+                state: { data: 'Solar Production' }
+              }}>
+              <img src={require('../assets/images/solar-house.png')} />
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={{
+                pathname: '/Chart',
+                state: { data: 'Battey Production' }
+              }}>
+              <img src={require('../assets/images/battery4.png')} />
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={{
+                pathname: '/Chart',
+                state: { data: 'Tower Production' }
+              }}>
+              <img src={require('../assets/images/tower.png')} />
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={{
+                pathname: '/Chart',
+                state: { data: 'Solar Panel Production' }
+              }}>
+              <img src={require('../assets/images/solar-panel.png')} />
+            </Link>
+          </li>
+          <li>
+            <img src={require('../assets/images/LPicon2.png')} />
+          </li>
+          <li class='circle-container-animation'>
+            <div class={`arrow arrow1 ${getClass(Battery_Power)}`}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class={`arrow arrow2 ${getClass(Solar_Power)}`}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class={`arrow arrow3 ${getClass(Grid_Power)}`}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class={`arrow arrow4 ${getClass(Load_Power)}`}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </li>
+          <li class='circle-container-lbl'>
+            <label> {Load_Power}</label>
+            <label> {Grid_Power}</label>
+            <label> {Battery_Power}</label>
+            <label> {Solar_Power}</label>
+          </li>
+        </ul>
+      </div>
     );
   }
 }
-export default EnergyFlow;
+export default withRouter(EnergyFlow);
+
+const getClass = data => {
+  let power = parseInt(data);
+  if (power > 1 && power <= 200) {
+    return 'classGreen';
+  } else if (power > 200 && power <= 400) {
+    return 'classYellow';
+  } else if (power > 400 && power <= 600) {
+    return 'classOrange';
+  } else {
+    return 'classRed';
+  }
+};
