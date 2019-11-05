@@ -113,7 +113,7 @@ class EnergyFlow extends React.Component {
           <li>
             <Link
               to={{
-                pathname: '/Chart',
+                pathname: '/TrialChart',
                 state: { data: 'Solar Production' }
               }}>
               <img src={require('../assets/images/solar-house.png')} />
@@ -122,7 +122,7 @@ class EnergyFlow extends React.Component {
           <li>
             <Link
               to={{
-                pathname: '/Chart',
+                pathname: '/TrialChart',
                 state: { data: 'Battey Production' }
               }}>
               <img src={require('../assets/images/battery4.png')} />
@@ -131,7 +131,7 @@ class EnergyFlow extends React.Component {
           <li>
             <Link
               to={{
-                pathname: '/Chart',
+                pathname: '/TrialChart',
                 state: { data: 'Tower Production' }
               }}>
               <img src={require('../assets/images/tower.png')} />
@@ -140,7 +140,7 @@ class EnergyFlow extends React.Component {
           <li>
             <Link
               to={{
-                pathname: '/Chart',
+                pathname: '/TrialChart',
                 state: { data: 'Solar Panel Production' }
               }}>
               <img src={require('../assets/images/solar-panel.png')} />

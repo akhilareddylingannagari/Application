@@ -103,7 +103,7 @@ class Details extends Component {
                     Math.round(Math.random() * 100)
                   ]);
                 }
-                console.log('*******************************8888888', data);
+                // console.log('*******************************8888888', data);
                 return data;
               })()
           }

@@ -128,7 +128,9 @@ const getData = (data) => {
     time: {
       useUTC: false
     },
-  
+    //   navigator: {
+    //     enabled: false
+    // },
     rangeSelector: {
       buttons: [{
           type: 'hour',
