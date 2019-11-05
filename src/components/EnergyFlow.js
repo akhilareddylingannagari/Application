@@ -160,12 +160,12 @@ class EnergyFlow extends React.Component {
               <span></span>
               <span></span>
             </div>
-            <div class={`arrow arrow3 ${getClass(Grid_Power)}`}>
+            <div class={`arrow ${getDirectionClass(Grid_Power , "grid")} ${getClass(Grid_Power)}`}>
               <span></span>
               <span></span>
               <span></span>
             </div>
-            <div class={`arrow arrow4 ${getClass(Load_Power)}`}>
+            <div class={`arrow ${getDirectionClass(Grid_Power , "load")} ${getClass(Load_Power)}`}>
               <span></span>
               <span></span>
               <span></span>
@@ -196,3 +196,23 @@ const getClass = data => {
     return 'classRed';
   }
 };
+
+const getDirectionClass = (data , name ) => {
+  let power = parseInt(data);
+
+  if(name == "grid"){
+    if (power < 0) {
+      return 'arrow3-reverse';
+    }  else {
+      return 'arrow3';
+    }
+  }
+
+  if(name == "load"){
+    if (power < 0 ) {
+      return 'arrow4-reverse';
+    }  else {
+      return 'arrow4';
+    }
+  }
+}
