@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 // Import Highcharts
 import StockChart from './Stock';
-
+import { Container, Row, Col } from 'reactstrap';
 import moment from 'react-moment';
 import 'moment-timezone';
 
@@ -78,12 +78,14 @@ class TrialChart extends React.Component {
   // }
 
   render() {
-    const { seriesData , graphTitle } = this.state;
-    let stockOptions = getData(seriesData , graphTitle);
+    const { seriesData, graphTitle } = this.state;
+    let stockOptions = getData(seriesData, graphTitle);
     return (
-      <div>
-        <StockChart options={stockOptions} highcharts={Highcharts} />
-      </div>
+      <Container>
+        <Row>
+          <Col sm="12" md={{ size: 8, offset: 3 }}> <StockChart options={stockOptions} highcharts={Highcharts} /></Col>
+        </Row>
+        </Container>
     );
   }
 }
@@ -91,7 +93,7 @@ class TrialChart extends React.Component {
 export default TrialChart;
 
 
-const getData = (data , graphTitle) => {
+const getData = (data, graphTitle) => {
   // console.log(data, "::state");
 
   let tempData = [];
@@ -169,7 +171,7 @@ const getData = (data , graphTitle) => {
       enabled: false
     },
     yAxis: {
-      opposite:false
+      opposite: false
     },
     xAxis: {
       type: 'datetime',
@@ -177,10 +179,22 @@ const getData = (data , graphTitle) => {
         // afterSetExtremes: afterSetExtremes
       },
       dateTimeLabelFormats: {
-        day: '%A , %d %b',
-        week: '%b'
+        millisecond: '%H:%M:%S.%L',
+        second: '%H:%M:%S',
+        minute: '%H:%M',
+        hour: '%H:%M',
+        day: '%A',
+        week: '%e. %b',
+        month: '%b \'%y',
+        year: '%Y'
+    }
+      
+      
+      // {
+      //   day: '%A , %d %b',
+      //   week: '%b'
 
-      }
+      // }
     },
     labels: {
       rotation: 315,
