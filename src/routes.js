@@ -12,20 +12,8 @@ import Chart from './pages/Chart';
 import TrialChart from './components/LinePlot';
 import Login from './UserPages/LoginPage';
 import withAuth from './wIthAuth';
+import Registration from "./UserPages/Registration"
 
-const RestrictedRoute = ({component: Component, ...rest, authUser}) =>
-    <Route
-        {...rest}
-        render={props =>
-            authUser
-                ? <Component {...props} />
-                : <Redirect
-                    to={{
-                        pathname: '/login',
-                        state: {from: props.location}
-                    }}
-                />}
-    />;
 
 export default [
   {
@@ -44,11 +32,11 @@ export default [
     layout: DefaultLayout,
     component: Login
   },
-  // {
-  //   path: '/Registration',
-  //   layout: DefaultLayout,
-  //   component: Registration
-  // },
+  {
+    path: '/Registration',
+    layout: DefaultLayout,
+    component: Registration
+  },
   {
     path: '/Chart',
     layout: DefaultLayout,

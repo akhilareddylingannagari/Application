@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 export default class Login extends Component {
     constructor(props) {
         super(props)
@@ -68,6 +69,9 @@ export default class Login extends Component {
                     required
                 />
                 <input type="submit" value="Submit" />
+
+
+                <Link to="/Registration">Registration</Link>
             </form>
         );
     }
