@@ -109,12 +109,12 @@ class EnergyFlow extends React.Component {
 
     return (
       <div>
-        <ul class='circle-container'>
+        <ul className='circle-container'>
           <li>
             <Link
               to={{
                 pathname: '/TrialChart',
-                state: { data: 'Solar Production' }
+                state: { data: 'Solar Production' , type : "solar" }
               }}>
               <img src={require('../assets/images/solar-house.png')} />
             </Link>
@@ -123,7 +123,7 @@ class EnergyFlow extends React.Component {
             <Link
               to={{
                 pathname: '/TrialChart',
-                state: { data: 'Battey Production' }
+                state: { data: 'Battey Production' , type : "battery" }
               }}>
               <img src={require('../assets/images/battery4.png')} />
             </Link>
@@ -132,7 +132,7 @@ class EnergyFlow extends React.Component {
             <Link
               to={{
                 pathname: '/TrialChart',
-                state: { data: 'Tower Production' }
+                state: { data: 'Tower Production' , type : "tower" }
               }}>
               <img src={require('../assets/images/tower.png')} />
             </Link>
@@ -141,7 +141,7 @@ class EnergyFlow extends React.Component {
             <Link
               to={{
                 pathname: '/TrialChart',
-                state: { data: 'Solar Panel Production' }
+                state: { data: 'Solar Panel Production' , type: "panel" }
               }}>
               <img src={require('../assets/images/solar-panel.png')} />
             </Link>
@@ -149,29 +149,21 @@ class EnergyFlow extends React.Component {
           <li>
             <img src={require('../assets/images/LPicon2.png')} />
           </li>
-          <li class='circle-container-animation'>
-            <div class={`arrow arrow1 ${getClass(Battery_Power)}`}>
-              <span></span>
-              <span></span>
-              <span></span>
+          <li className='circle-container-animation'>
+            <div className={`arrow arrow1 ${getClass(Battery_Power)}`}>
+             <SpanComponent/>
             </div>
-            <div class={`arrow arrow2 ${getClass(Solar_Power)}`}>
-              <span></span>
-              <span></span>
-              <span></span>
+            <div className={`arrow arrow2 ${getClass(Solar_Power)}`}>
+             <SpanComponent/>
             </div>
-            <div class={`arrow ${getDirectionClass(Grid_Power , "grid")} ${getClass(Grid_Power)}`}>
-              <span></span>
-              <span></span>
-              <span></span>
+            <div className={`arrow ${getDirectionClass(Grid_Power , "grid")} ${getClass(Grid_Power)}`}>
+             <SpanComponent/>
             </div>
-            <div class={`arrow ${getDirectionClass(Grid_Power , "load")} ${getClass(Load_Power)}`}>
-              <span></span>
-              <span></span>
-              <span></span>
+            <div className={`arrow ${getDirectionClass(Load_Power , "load")} ${getClass(Load_Power)}`}>
+             <SpanComponent/>
             </div>
           </li>
-          <li class='circle-container-lbl'>
+          <li className='circle-container-lbl'>
             <label> {Load_Power}</label>
             <label> {Grid_Power}</label>
             <label> {Battery_Power}</label>
@@ -216,3 +208,6 @@ const getDirectionClass = (data , name ) => {
     }
   }
 }
+
+
+const SpanComponent = () => <React.Fragment> <span></span><span></span><span></span></React.Fragment>

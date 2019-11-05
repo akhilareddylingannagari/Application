@@ -23,9 +23,11 @@ require('highcharts/modules/map')(Highcharts);
 
 class TrialChart extends React.Component {
   constructor(props) {
+    const { state } = props.location;
     super(props);
     this.state = {
-
+      graphTitle: state && state.data ? state.data : null,
+      graphType: state && state.type ? state.type : null,
       seriesData: [],
 
 
@@ -36,7 +38,7 @@ class TrialChart extends React.Component {
   //   let newData = [];
   //   let temp = [];
   //   fetch(
-  //     'https://c7pduqwyg6.execute-api.eu-west-1.amazonaws.com/prod/'
+  //     getAPI(this.state.graphType)
   //   )
   //     .then(response => response.json())
   //     .then(res => {
@@ -76,10 +78,10 @@ class TrialChart extends React.Component {
   // }
 
   render() {
-    // const { stockOptions } = this.state;
-    let stockOptions = getData(this.state.seriesData);
+    const { seriesData , graphTitle } = this.state;
+    let stockOptions = getData(seriesData , graphTitle);
     return (
-      <div style={{width:"100%"}}>
+      <div style={{ width: "100%" }}>
         <StockChart options={stockOptions} highcharts={Highcharts} />
       </div>
     );
@@ -89,7 +91,7 @@ class TrialChart extends React.Component {
 export default TrialChart;
 
 
-const getData = (data) => {
+const getData = (data , graphTitle) => {
   // console.log(data, "::state");
 
   let tempData = [];
@@ -111,20 +113,20 @@ const getData = (data) => {
   let stockOptions = {
     chart: {
       zoomType: 'x',
-         events: {
-               load: function () {
-              
-                  // set up the updating of the chart each second
-                  var series = this.series[0];
-                  setInterval(function () {
-                      var x = (new Date()).getTime(), // current time
-                          y = Math.round(Math.random() * 100);
-                      series.addPoint([x, y], true, true);
-                  }, 10000);
-              } 
-          } 
+      events: {
+        load: function () {
+
+          // set up the updating of the chart each second
+          var series = this.series[0];
+          setInterval(function () {
+            var x = (new Date()).getTime(), // current time
+              y = Math.round(Math.random() * 100);
+            series.addPoint([x, y], true, true);
+          }, 10000);
+        }
+      }
     },
-  
+
     time: {
       useUTC: false
     },
@@ -133,36 +135,36 @@ const getData = (data) => {
     // },
     rangeSelector: {
       buttons: [{
-          type: 'hour',
-          count: 1,
-          text: '1h'
-        },
-        {
-          type: 'day',
-          count: 1,
-          text: '1d'
-        }, {
-          type: 'week',
-          count: 1,
-          text: 'week'
-        }, {
-          type: 'month',
-          count: 1,
-          text: '1m'
-        }, {
-          type: 'year',
-          count: 1,
-          text: '1y'
-        },
+        type: 'hour',
+        count: 1,
+        text: '1h'
+      },
+      {
+        type: 'day',
+        count: 1,
+        text: '1d'
+      }, {
+        type: 'week',
+        count: 1,
+        text: 'week'
+      }, {
+        type: 'month',
+        count: 1,
+        text: '1m'
+      }, {
+        type: 'year',
+        count: 1,
+        text: '1y'
+      },
       ],
       inputEnabled: false,
       selected: 0
     },
-  
+
     title: {
-      text: 'Solar Data'
+      text: graphTitle
     },
-  
+
     exporting: {
       enabled: false
     },
@@ -172,23 +174,23 @@ const getData = (data) => {
         // afterSetExtremes: afterSetExtremes
       },
       dateTimeLabelFormats: {
-            day: '%A , %d %b',
-            week: '%b'
+        day: '%A , %d %b',
+        week: '%b'
 
-        }
+      }
     },
     labels: {
       rotation: 315,
     },
-  
+
     series: [{
       name: 'Random data',
-      data: (function() {
+      data: (function () {
         // generate an array of random data
         var data = [],
           time = (new Date()).getTime(),
           i;
-  
+
         for (i = -3222222; i <= 0; i += 1) {
           data.push([
             time + i * 10000,
@@ -201,4 +203,21 @@ const getData = (data) => {
   }
 
   return stockOptions;
+}
+
+
+
+const getAPI = (item) => {
+  if (item === "solar") {
+    return "https://c7pduqwyg6.execute-api.eu-west-1.amazonaws.com/prod/"
+  } else
+    if (item === "battery") {
+      return "https://c7pduqwyg6.execute-api.eu-west-1.amazonaws.com/prod/"
+    } else
+      if (item === "tower") {
+        return "https://c7pduqwyg6.execute-api.eu-west-1.amazonaws.com/prod/"
+      } else
+        if (item === "panel") {
+          return "https://c7pduqwyg6.execute-api.eu-west-1.amazonaws.com/prod/"
+        } else return "https://c7pduqwyg6.execute-api.eu-west-1.amazonaws.com/prod/"
 }
