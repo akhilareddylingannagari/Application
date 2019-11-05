@@ -81,7 +81,7 @@ class TrialChart extends React.Component {
     const { seriesData , graphTitle } = this.state;
     let stockOptions = getData(seriesData , graphTitle);
     return (
-      <div style={{ width: "100%" }}>
+      <div>
         <StockChart options={stockOptions} highcharts={Highcharts} />
       </div>
     );
@@ -167,6 +167,9 @@ const getData = (data , graphTitle) => {
 
     exporting: {
       enabled: false
+    },
+    yAxis: {
+      opposite:false
     },
     xAxis: {
       type: 'datetime',

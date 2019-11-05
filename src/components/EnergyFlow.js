@@ -114,8 +114,10 @@ class EnergyFlow extends React.Component {
             <Link
               to={{
                 pathname: '/TrialChart',
-                state: { data: 'Solar Production' , type : "solar" }
-              }}>
+                state: { data: 'Solar Production', type: "solar" },
+              }}
+              className={Solar_Power == 0 ? 'disabled-link' : ""}
+            >
               <img src={require('../assets/images/solar-house.png')} />
             </Link>
           </li>
@@ -123,8 +125,10 @@ class EnergyFlow extends React.Component {
             <Link
               to={{
                 pathname: '/TrialChart',
-                state: { data: 'Battey Production' , type : "battery" }
-              }}>
+                state: { data: 'Battey Production', type: "battery" },
+              }}
+              className={Battery_Power == 0 ? 'disabled-link' : ""}
+            >
               <img src={require('../assets/images/battery4.png')} />
             </Link>
           </li>
@@ -132,8 +136,10 @@ class EnergyFlow extends React.Component {
             <Link
               to={{
                 pathname: '/TrialChart',
-                state: { data: 'Tower Production' , type : "tower" }
-              }}>
+                state: { data: 'Tower Production', type: "tower" },
+              }}
+              className={Load_Power == 0 ? 'disabled-link' : ""}
+            >
               <img src={require('../assets/images/tower.png')} />
             </Link>
           </li>
@@ -141,8 +147,10 @@ class EnergyFlow extends React.Component {
             <Link
               to={{
                 pathname: '/TrialChart',
-                state: { data: 'Solar Panel Production' , type: "panel" }
-              }}>
+                state: { data: 'Solar Panel Production', type: "panel" },
+              }}
+              className={Grid_Power == 0 ? 'disabled-link' : ""}
+            >
               <img src={require('../assets/images/solar-panel.png')} />
             </Link>
           </li>
@@ -151,16 +159,16 @@ class EnergyFlow extends React.Component {
           </li>
           <li className='circle-container-animation'>
             <div className={`arrow arrow1 ${getClass(Battery_Power)}`}>
-             <SpanComponent/>
+              <SpanComponent />
             </div>
             <div className={`arrow arrow2 ${getClass(Solar_Power)}`}>
-             <SpanComponent/>
+              <SpanComponent />
             </div>
-            <div className={`arrow ${getDirectionClass(Grid_Power , "grid")} ${getClass(Grid_Power)}`}>
-             <SpanComponent/>
+            <div className={`arrow ${getDirectionClass(Grid_Power, "grid")} ${getClass(Grid_Power)}`}>
+              <SpanComponent />
             </div>
-            <div className={`arrow ${getDirectionClass(Load_Power , "load")} ${getClass(Load_Power)}`}>
-             <SpanComponent/>
+            <div className={`arrow ${getDirectionClass(Load_Power, "load")} ${getClass(Load_Power)}`}>
+              <SpanComponent />
             </div>
           </li>
           <li className='circle-container-lbl'>
@@ -189,21 +197,21 @@ const getClass = data => {
   }
 };
 
-const getDirectionClass = (data , name ) => {
+const getDirectionClass = (data, name) => {
   let power = parseInt(data);
 
-  if(name == "grid"){
+  if (name == "grid") {
     if (power < 0) {
       return 'arrow3-reverse';
-    }  else {
+    } else {
       return 'arrow3';
     }
   }
 
-  if(name == "load"){
-    if (power < 0 ) {
+  if (name == "load") {
+    if (power < 0) {
       return 'arrow4-reverse';
-    }  else {
+    } else {
       return 'arrow4';
     }
   }
