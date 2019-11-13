@@ -31,6 +31,7 @@ export default class UserActions extends React.Component {
   };
   removeLocalstorage = () => {
     localStorage.removeItem('user_id');
+    localStorage.removeItem('user_name');
   };
   render() {
     return (
@@ -44,7 +45,8 @@ export default class UserActions extends React.Component {
               width={50}
               height={40}
             />{' '}
-            <span className='d-none d-md-inline-block'>Akhila</span>
+            <span className='d-none d-md-inline-block'>{ localStorage.getItem("user_name") ? JSON.parse(localStorage.getItem("user_name")) : ""}</span>
+
           </DropdownToggle>
           <Collapse tag={DropdownMenu} right small open={this.state.visible}>
             <DropdownItem tag={Link} to='user-profile'>

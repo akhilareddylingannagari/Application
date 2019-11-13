@@ -39,6 +39,10 @@ class Login extends Component {
       'user_id',
       JSON.stringify('eyJzdWIiOiJlYjhkYWYwNy0zYjk4LTRhMTEtOTYwZC00M')
     ); // temporary purpose , just to add some token to localstorage
+    localStorage.setItem(
+      'user_name',
+      JSON.stringify(this.state.email)
+    ); 
     this.props.history.push('/Dashboard');
     fetch('/api/authenticate', {
       method: 'POST',
